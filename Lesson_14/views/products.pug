@@ -1,0 +1,13 @@
+extends layouts/default.pug 
+include mixins/box-head.pug
+
+block main
+  +box-head("Products", "This is desc of product page")
+
+  ul(class) 
+    each product in products
+      li
+        | #{product.title}
+        br
+        img(src=product.thumbnail,class = "img-thumbnail")
+        p  Price: #{product.price}$
