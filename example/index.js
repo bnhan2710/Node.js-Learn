@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require('mongoose');
+const morgan  =  require('morgan');
 mongoose.connect('mongodb://127.0.0.1:27017/test-product-nodejs-28tech');
 
 const Product = mongoose.model('Product', { 
@@ -10,6 +11,8 @@ const Product = mongoose.model('Product', {
 
 const app = express();
 const port = 3000;
+
+app.use(morgan('dev'));
 
 app.set("views", "./views");
 app.set("view engine", "pug");
@@ -26,7 +29,7 @@ app.use(express.static('public'));
 app.get("/products", async (req,res) => {
   try{
     const products = await Product.find({});
-    console.log(products);
+    // console.log(products);
     res.render("products.pug", {
       titlePage: "Danh sach san pham",
       products: products
