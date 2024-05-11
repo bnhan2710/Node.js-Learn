@@ -1,5 +1,6 @@
 extends ../../layouts/default.pug
 include ../../mixins/box-head.pug
+
 block main
   .container.my-3
     .row
@@ -7,13 +8,13 @@ block main
         +box-head("List of Products")
 
     .row
-      .col-4.mb-3
-        .product-item
-          .inner-image
-              img(src="https://cdn.dummyjson.com/product-images/1/thumbnail.jpg", alt="Iphone 9")
-          .inner-content
-            h3.inner-title iPhone 9
-            .inner-price-new 80$
-            .inner-price-old 100$
-            .inner-discount -20%
-
+      each product in products
+        .col-4.mb-3
+          .product-item
+            .inner-image
+              img(src= product.thumbnail, alt=product.title)
+            .inner-content
+              h3.inner-title #{product.title}
+              .inner-price-new #{product.pricenew}$
+              .inner-price-old #{product.price}$
+              .inner-discount #{product.discountPercentage}%
