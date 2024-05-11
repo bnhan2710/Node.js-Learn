@@ -1,31 +1,20 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+# Configuration for the Node.js application
+app:
+  name: Product Management
+  version: 1.0.0
+  description: "Product Management Application using Express.js and Pug.js "
+  main: index.js
+  scripts:
+    start: node index.js
+    test: jest
+  dependencies:
+    express: "^4.19.2"
+    pug: "^3.0.2"
+    # List of other dependencies
+  devDependencies:
+    nodemon: "^3.1.0"
+    # List of other development dependencies
 
-name: Node.js CI
-
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
-jobs:
-  build:
-
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [14.x, 16.x, 18.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
-    steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
+server:
+  port: 3000
+  host: localhost
