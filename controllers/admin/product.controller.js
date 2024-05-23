@@ -6,17 +6,16 @@ const systemConfig = require("../../config/system");
 // [GET] /admin/products/
 module.exports.index = async (req, res) => {
   try {
-    // Status Filter
-    const filterStatus = filterStatusHelper(req.query);
-    // End Status Filter
-
     const find = {
       deleted: false
     }
-
+    
+    // Status Filter
+    const filterStatus = filterStatusHelper(req.query);
     if(req.query.status) {
       find.status = req.query.status;
     }
+    // End Status Filter
 
     // Search
     if(req.query.keyword) {
